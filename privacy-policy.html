@@ -30,7 +30,7 @@
 
   <section id="english">
     <h2>1. Who operates HAIOS</h2>
-    <p>HAIOS is a software project maintained by the individual developer associated with the GitHub account <a href="https://github.com/charan-forlorn">charan-forlorn</a> (“the Developer”, “we”, or “us”). This notice applies to the HAIOS R1 Dropbox read-only connector and this policy website. HAIOS is not represented by this notice as a corporation or other registered legal entity.</p>
+    <p>HAIOS is a software project maintained by the developer operating under the GitHub account <a href="https://github.com/charan-forlorn">charan-forlorn</a> (“the Developer”, “we”, or “us”). This notice applies to the HAIOS R1 Dropbox read-only connector and this policy website. This notice does not represent HAIOS as a corporation or other registered legal entity. The Developer is responsible for the privacy, security, and integrity of Dropbox user data accessed by the R1 connector, and processes that data only within the scope authorized by the user.</p>
 
     <h2>2. What the connector does</h2>
     <p>When a user chooses to run the connector, it uses a Dropbox OAuth access token supplied by the user after authorization with Dropbox. The connector validates that the grant is a Bearer token with exactly the <code>account_info.read</code> scope and a valid lifetime. It makes only these Dropbox API v2 calls:</p>
@@ -72,11 +72,11 @@
     <h2>9. International processing</h2>
     <p>The connector runs locally on the operator's Windows computer. Dropbox processes API requests through Dropbox's infrastructure, and GitHub hosts this policy website. Those providers may process service and security data in locations determined by their own services and terms. The Developer does not operate a separate cloud repository for R1 Dropbox account or storage data.</p>
 
-    <h2>10. Changes to this policy</h2>
+    <h2>11. Changes to this policy</h2>
     <p>This notice will be updated if the connector's data use, scopes, endpoints, storage, sharing, or deployment model materially changes. Features such as file metadata access, file-content retrieval, synchronization, indexing, or cloud AI processing are outside R1 and are not authorized by this policy. They require a separate design, appropriate authorization, and an updated privacy notice before use.</p>
 
-    <h2>11. Contact and privacy questions</h2>
-    <p>For questions about this policy or to request a private contact route for a privacy matter, use the Developer's <a href="https://github.com/charan-forlorn">GitHub profile</a>. Do not post access tokens, passwords, full Dropbox account details, or other sensitive personal information in public repository issues.</p>
+    <h2>12. Contact and privacy questions</h2>
+    <p>To start a privacy inquiry, use the <a href="https://github.com/charan-forlorn/haios-privacy/issues">public repository issue page</a> and request a private contact route only. Do not include personal information, Dropbox account details, passwords, access tokens, or other sensitive material in a public issue. The Developer will respond through GitHub to arrange a suitable private channel before any sensitive information is requested. The Developer can also be reached through the <a href="https://github.com/charan-forlorn">GitHub profile</a>.</p>
     <p>This notice describes the implemented R1 connector boundary. It is informational and is not a legal opinion or a representation that every future HAIOS component has the same data practices.</p>
   </section>
 
@@ -118,8 +118,11 @@
     <h3>9. การประมวลผลในต่างประเทศและการเปลี่ยนแปลง</h3>
     <p>Connector ทำงานในเครื่อง Windows ของผู้ใช้ ส่วน Dropbox และ GitHub ประมวลผลข้อมูลที่จำเป็นต่อบริการตามโครงสร้างพื้นฐานและเงื่อนไขของผู้ให้บริการนั้น การเพิ่มสิทธิ์อ่าน Metadata/เนื้อหาไฟล์ การ Sync การทำ Index หรือ Cloud AI Processing อยู่นอกขอบเขต R1 และต้องผ่านการออกแบบ การอนุญาต และปรับปรุงนโยบายก่อน</p>
 
-    <h3>10. ติดต่อ</h3>
-    <p>สอบถามเกี่ยวกับนโยบายนี้หรือขอช่องทางติดต่อส่วนตัวได้ผ่าน <a href="https://github.com/charan-forlorn">GitHub Profile ของผู้พัฒนา</a> โปรดอย่าโพสต์ Token รหัสผ่าน ข้อมูลบัญชี Dropbox แบบเต็ม หรือข้อมูลส่วนบุคคลที่ละเอียดอ่อนใน GitHub Issue สาธารณะ</p>
+    <h3>10. สิทธิและคำขอเกี่ยวกับข้อมูลส่วนบุคคล</h3>
+    <p>ขึ้นอยู่กับกฎหมายที่ใช้บังคับ ผู้ใช้อาจมีสิทธิขอเข้าถึง แก้ไข ลบ หรือจำกัดการประมวลผลข้อมูลส่วนบุคคลที่ผู้พัฒนาดูแล R1 ไม่มีบัญชีผู้ใช้หรือสำเนาข้อมูลสรุปบนเซิร์ฟเวอร์ HAIOS หากผู้ใช้บันทึกผลลัพธ์ไว้ในเครื่อง ผู้ใช้เป็นผู้ควบคุมสำเนานั้น ส่วนคำขอที่เกี่ยวกับข้อมูลที่ Dropbox ถือครองควรส่งไปยังช่องทางความเป็นส่วนตัวของ Dropbox</p>
+
+    <h3>11. ติดต่อ</h3>
+    <p>เริ่มต้นคำถามด้านความเป็นส่วนตัวได้ที่ <a href="https://github.com/charan-forlorn/haios-privacy/issues">หน้า GitHub Issues ของ Repository นี้</a> โดยขอช่องทางติดต่อส่วนตัวเท่านั้น ห้ามใส่ข้อมูลส่วนบุคคล รายละเอียดบัญชี Dropbox รหัสผ่าน Access Token หรือข้อมูลละเอียดอ่อนอื่นใน Issue สาธารณะ ผู้พัฒนาจะตอบกลับผ่าน GitHub เพื่อจัดหาช่องทางส่วนตัวที่เหมาะสมก่อนขอข้อมูลละเอียดอ่อนใด ๆ หรือใช้ <a href="https://github.com/charan-forlorn">GitHub Profile ของผู้พัฒนา</a></p>
   </section>
 
   <footer><div class="wrap">
