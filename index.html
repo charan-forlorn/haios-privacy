@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HAIOS is a local-first, governed AI execution system. Learn about its narrowly scoped Dropbox read-only connector and privacy practices.">
+  <meta name="robots" content="index,follow">
+  <title>HAIOS — Project & Privacy</title>
+  <style>
+    :root{color-scheme:light;--ink:#172033;--muted:#536176;--line:#dce3ec;--accent:#2457a7;--surface:#f5f8fc}
+    *{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}
+    header{background:var(--surface);border-bottom:1px solid var(--line)}main,header>div,footer{max-width:900px;margin:auto;padding:30px 22px}
+    h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2em}p,li{max-width:75ch}a{color:var(--accent);overflow-wrap:anywhere}
+    .card{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0}.meta{color:var(--muted)}
+    footer{border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+  </style>
+</head>
+<body>
+<header><div><p class="meta">LOCAL-FIRST · GOVERNED · EVIDENCE-DRIVEN</p><h1>HAIOS</h1><p>A governed AI execution system designed to make agent-driven work scoped, reviewable, recoverable, and supported by evidence.</p></div></header>
+<main>
+  <h2>Dropbox integration</h2>
+  <div class="card">
+    <p>The HAIOS R1 Dropbox connector is a local Windows/Python command-line component that retrieves only basic Dropbox account information and storage usage.</p>
+    <ul>
+      <li>OAuth permission: <code>account_info.read</code> only.</li>
+      <li>API operations: <code>users/get_current_account</code> and <code>users/get_space_usage</code>.</li>
+      <li>No Dropbox file/folder listing, file content access, upload, download, sharing, or modification.</li>
+      <li>Token and API processing take place in the local connector process; the connector does not maintain a cloud data store.</li>
+    </ul>
+    <p><strong>Availability:</strong> R1 is implemented as a local connector. Production activation in the HAIOS Hermes/MCP runtime is not currently enabled.</p>
+  </div>
+  <h2>Privacy</h2>
+  <p>Read how HAIOS processes Dropbox account and storage data, handles OAuth tokens, limits API access, and treats local output and third-party hosting.</p>
+  <p><a href="./privacy-policy.html"><strong>Read the HAIOS Privacy Policy (English / ภาษาไทย)</strong></a></p>
+  <h2>Project information</h2>
+  <p>HAIOS is maintained by the developer associated with <a href="https://github.com/charan-forlorn">GitHub account charan-forlorn</a>.</p>
+  <p>Public documentation repository: <a href="https://github.com/charan-forlorn/haios-privacy">github.com/charan-forlorn/haios-privacy</a>.</p>
+</main>
+<footer><p>HAIOS · Project information and privacy notice · 18 November 2026</p></footer>
+</body>
+</html>
