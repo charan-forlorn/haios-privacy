@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Privacy Policy for the HAIOS local, read-only Dropbox account and storage connector.">
+  <meta name="robots" content="index,follow">
+  <title>Privacy Policy — HAIOS</title>
+  <style>
+    :root{color-scheme:light;--ink:#172033;--muted:#536176;--line:#dce3ec;--accent:#2457a7;--surface:#f5f8fc}
+    *{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}
+    header{background:var(--surface);border-bottom:1px solid var(--line)}.wrap{max-width:920px;margin:auto;padding:28px 22px}
+    h1{font-size:2.1rem;line-height:1.2;margin:.3em 0}h2{font-size:1.3rem;margin-top:2.1em}h3{font-size:1.05rem;margin-top:1.5em}
+    p,li{max-width:78ch}a{color:var(--accent);overflow-wrap:anywhere}nav{display:flex;gap:16px;flex-wrap:wrap}
+    .meta,.callout{color:var(--muted)}.callout{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:18px 0}
+    .lang{border-top:2px solid var(--line);margin-top:3rem;padding-top:1.5rem}footer{border-top:1px solid var(--line);color:var(--muted);font-size:.92rem;margin-top:3rem}
+    code{background:var(--surface);padding:.12em .35em;border-radius:4px}
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="./">HAIOS home</a><a href="#english">English</a><a href="#thai">ภาษาไทย</a><a href="https://github.com/charan-forlorn/haios-privacy">Policy repository</a></nav>
+  <h1>Privacy Policy</h1>
+  <p class="meta">HAIOS — Dropbox Read-Only Connector · Version R1 · Effective date: 18 November 2026</p>
+</div></header>
+<main class="wrap">
+  <div class="callout">
+    <strong>Scope notice.</strong> This policy describes the current R1 Dropbox connector: a local Windows/Python command-line component for account and storage summaries. It is not a hosted Dropbox file browser, sync service, backup service, or document-indexing service. The connector is not currently activated in the production Hermes/MCP runtime.
+  </div>
+
+  <section id="english">
+    <h2>1. Who operates HAIOS</h2>
+    <p>HAIOS is a software project maintained by the individual developer associated with the GitHub account <a href="https://github.com/charan-forlorn">charan-forlorn</a> (“the Developer”, “we”, or “us”). This notice applies to the HAIOS R1 Dropbox read-only connector and this policy website. HAIOS is not represented by this notice as a corporation or other registered legal entity.</p>
+
+    <h2>2. What the connector does</h2>
+    <p>When a user chooses to run the connector, it uses a Dropbox OAuth access token supplied by the user after authorization with Dropbox. The connector validates that the grant is a Bearer token with exactly the <code>account_info.read</code> scope and a valid lifetime. It makes only these Dropbox API v2 calls:</p>
+    <ul>
+      <li><code>users/get_current_account</code> — obtains the account display name, email address, email-verification flag, and account type.</li>
+      <li><code>users/get_space_usage</code> — obtains storage usage and allocation information.</li>
+    </ul>
+    <p>The connector does not request or access Dropbox file or folder listings, file names, file paths, file metadata, file contents, shared links, revisions, or team content. It has no Dropbox upload, download, edit, move, share, or delete operation.</p>
+
+    <h2>3. Information processed</h2>
+    <ul>
+      <li><strong>OAuth grant information:</strong> the access token, scope, token type, expiry duration, issue timestamp, and a boolean indicating whether a refresh token was supplied. The access token is received through standard input, held in process memory, and sent to Dropbox in the HTTPS Authorization header for the two approved API calls. The connector does not support or store refresh tokens.</li>
+      <li><strong>Account information:</strong> Dropbox returns the account display name, email address, email-verification status, and account type. The full email address is handled transiently in process memory so it can be masked. The connector's output contains only the masked email address (for example, <code>j***@example.com</code>), not the full email address.</li>
+      <li><strong>Storage information:</strong> storage allocation type, bytes used, allocated bytes when provided by Dropbox, and derived remaining bytes and usage percentage when calculable.</li>
+      <li><strong>Snapshot metadata:</strong> the time at which the local connector creates the normalized snapshot.</li>
+    </ul>
+    <p>The connector does not collect the user's Dropbox password. Dropbox authentication takes place through Dropbox's own authorization experience; the connector receives an access token, not the user's password.</p>
+
+    <h2>4. Why information is processed</h2>
+    <p>The information is processed only to authenticate the limited API request, validate the requested permission and token lifetime, show the user a current account/storage summary, and report whether the request succeeded. The R1 connector does not use Dropbox information for advertising, behavioural profiling, sale of data, or training AI models. It does not send Dropbox API response data to a separate AI model provider.</p>
+
+    <h2>5. Where information goes and who receives it</h2>
+    <ul>
+      <li><strong>Dropbox:</strong> the connector sends the access token and the two API requests directly to Dropbox over HTTPS. Dropbox processes the request and returns the requested account and storage information under Dropbox's own terms and privacy practices. See the <a href="https://www.dropbox.com/privacy">Dropbox Privacy Policy</a>.</li>
+      <li><strong>GitHub Pages:</strong> this public policy website is hosted by GitHub Pages. GitHub states that it logs and stores visitors' IP addresses for security purposes. See the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement">GitHub Privacy Statement</a>.</li>
+    </ul>
+    <p>The R1 connector does not upload the Dropbox summary to a HAIOS-operated cloud database, object store, analytics service, advertising network, or third-party AI service. No sale of Dropbox user data takes place. The Developer does not receive the user's Dropbox password or retain the access token.</p>
+
+    <h2>6. Storage and retention</h2>
+    <p>The connector is designed to process the token and API responses in local process memory. It does not create a credential file, database, cache, or server-side account record. It emits a normalized, redacted JSON summary to standard output and does not itself write that summary to persistent storage.</p>
+    <p>The person operating the local computer may choose to redirect or save command output, or their terminal, shell, operating system, backup, or logging configuration may retain it. Any such operator-controlled copy is outside the connector's own storage mechanism and should be protected and deleted by that operator according to their needs. Python and the operating system do not guarantee forensic zeroization of all in-memory copies when a process exits.</p>
+
+    <h2>7. Security measures</h2>
+    <p>The R1 implementation uses HTTPS with standard TLS certificate validation, rejects HTTP redirects, restricts requests to the two fixed endpoints, checks the exact required scope, enforces token-expiry metadata and request-size/time limits, masks email addresses, and sanitizes error output. These measures reduce risk but cannot guarantee absolute security. Users should protect their devices and never share access tokens or application secrets.</p>
+
+    <h2>8. User choices and access revocation</h2>
+    <p>Use of the connector is optional. A user can stop running it and can manage or revoke the application's authorization through their Dropbox account's connected-app controls. Revoking authorization prevents future API access using that authorization, subject to Dropbox's token and revocation behavior. Because the R1 connector does not maintain a server-side account or token store, it has no HAIOS-hosted account record to delete.</p>
+
+    <h2>9. International processing</h2>
+    <p>The connector runs locally on the operator's Windows computer. Dropbox processes API requests through Dropbox's infrastructure, and GitHub hosts this policy website. Those providers may process service and security data in locations determined by their own services and terms. The Developer does not operate a separate cloud repository for R1 Dropbox account or storage data.</p>
+
+    <h2>10. Changes to this policy</h2>
+    <p>This notice will be updated if the connector's data use, scopes, endpoints, storage, sharing, or deployment model materially changes. Features such as file metadata access, file-content retrieval, synchronization, indexing, or cloud AI processing are outside R1 and are not authorized by this policy. They require a separate design, appropriate authorization, and an updated privacy notice before use.</p>
+
+    <h2>11. Contact and privacy questions</h2>
+    <p>For questions about this policy or to request a private contact route for a privacy matter, use the Developer's <a href="https://github.com/charan-forlorn">GitHub profile</a>. Do not post access tokens, passwords, full Dropbox account details, or other sensitive personal information in public repository issues.</p>
+    <p>This notice describes the implemented R1 connector boundary. It is informational and is not a legal opinion or a representation that every future HAIOS component has the same data practices.</p>
+  </section>
+
+  <section id="thai" class="lang" lang="th">
+    <h2>นโยบายความเป็นส่วนตัว (ภาษาไทย)</h2>
+    <p><strong>ขอบเขต:</strong> นโยบายนี้ครอบคลุม Dropbox Connector รุ่น R1 ของ HAIOS ซึ่งเป็นโปรแกรม Command Line ที่ทำงานภายในเครื่อง Windows/Python เพื่ออ่านข้อมูลบัญชีและสถิติพื้นที่จัดเก็บเท่านั้น ปัจจุบัน Connector ยังไม่ได้เปิดใช้งานใน Hermes/MCP Runtime สำหรับ Production</p>
+
+    <h3>1. ผู้ดูแล HAIOS</h3>
+    <p>HAIOS เป็นโครงการซอฟต์แวร์ที่ดูแลโดยนักพัฒนารายบุคคลผ่านบัญชี GitHub <a href="https://github.com/charan-forlorn">charan-forlorn</a> นโยบายนี้ไม่ใช่การแสดงว่า HAIOS เป็นบริษัทหรือนิติบุคคลที่จดทะเบียนแล้ว</p>
+
+    <h3>2. ข้อมูลที่ Dropbox Connector เข้าถึง</h3>
+    <p>Connector ใช้ Dropbox OAuth Access Token ที่ผู้ใช้ได้รับจากการอนุญาตกับ Dropbox โดยตรวจสอบสิทธิ์ <code>account_info.read</code> เท่านั้น และเรียก API เพียง 2 รายการ ได้แก่ <code>users/get_current_account</code> สำหรับข้อมูลบัญชี และ <code>users/get_space_usage</code> สำหรับข้อมูลพื้นที่จัดเก็บ</p>
+    <p>Connector ไม่อ่านรายชื่อไฟล์ โฟลเดอร์ ชื่อหรือเส้นทางไฟล์ Metadata หรือเนื้อหาไฟล์ ไม่ค้นหา ดาวน์โหลด อัปโหลด แชร์ แก้ไข ย้าย หรือลบไฟล์ Dropbox</p>
+
+    <h3>3. ประเภทข้อมูลที่ประมวลผล</h3>
+    <ul>
+      <li>OAuth Access Token, Scope, Token Type, อายุ Token, เวลาออก Token และสถานะว่ามี Refresh Token หรือไม่ โดย Token รับผ่าน Standard Input และอยู่ในหน่วยความจำระหว่างทำงานเท่านั้น</li>
+      <li>ชื่อบัญชี อีเมล สถานะยืนยันอีเมล และประเภทบัญชีจาก Dropbox โดยอีเมลเต็มถูกประมวลผลชั่วคราวเพื่อปกปิด และผลลัพธ์แสดงเฉพาะอีเมลที่ปกปิดแล้ว</li>
+      <li>ประเภทโควตาพื้นที่จัดเก็บ จำนวนไบต์ที่ใช้ จำนวนไบต์ที่จัดสรร (เมื่อ Dropbox ส่งข้อมูลนี้มา) และค่าคงเหลือ/เปอร์เซ็นต์การใช้งานที่คำนวณได้</li>
+      <li>เวลาที่สร้าง Snapshot ในเครื่อง</li>
+    </ul>
+    <p>Connector ไม่รับหรือจัดเก็บรหัสผ่าน Dropbox การเข้าสู่ระบบและการอนุญาตเกิดขึ้นผ่านระบบของ Dropbox เอง</p>
+
+    <h3>4. วัตถุประสงค์</h3>
+    <p>ใช้ข้อมูลเพื่อยืนยันสิทธิ์ ตรวจสอบขอบเขต OAuth เรียกข้อมูลบัญชีและพื้นที่จัดเก็บ และแสดงผลสรุปแก่ผู้ใช้งานเท่านั้น R1 ไม่ใช้ข้อมูลเพื่อโฆษณา การติดตามพฤติกรรม การขายข้อมูล หรือฝึกโมเดล AI และไม่ส่งข้อมูลตอบกลับจาก Dropbox ไปยังผู้ให้บริการโมเดล AI รายอื่น</p>
+
+    <h3>5. การส่งต่อข้อมูล</h3>
+    <p>Connector ส่ง Access Token และคำขอ API ทั้งสองรายการไปยัง Dropbox โดยตรงผ่าน HTTPS เพื่อให้ Dropbox ประมวลผลตามนโยบายของ Dropbox ส่วนเว็บไซต์นโยบายนี้โฮสต์บน GitHub Pages ซึ่ง GitHub ระบุว่าบันทึกและจัดเก็บ IP Address ของผู้เข้าชมเพื่อความปลอดภัย HAIOS R1 ไม่อัปโหลดข้อมูลสรุปไปยังฐานข้อมูล Cloud, Object Storage, Analytics, เครือข่ายโฆษณา หรือบริการ AI ภายนอก และไม่มีการขายข้อมูล</p>
+
+    <h3>6. การจัดเก็บและระยะเวลาเก็บรักษา</h3>
+    <p>Connector ประมวลผล Token และ API Response ในหน่วยความจำของโปรเซสภายในเครื่อง ไม่สร้างไฟล์เก็บ Credential, Database, Cache หรือบัญชีผู้ใช้บนเซิร์ฟเวอร์ ผลลัพธ์ JSON ที่ถูกปกปิดจะถูกส่งออกทาง Standard Output เท่านั้น ตัวโปรแกรมไม่ได้บันทึกผลลัพธ์นั้นลง Persistent Storage โดยตรง อย่างไรก็ตาม ผู้ดูแลเครื่องอาจเลือกบันทึก Output หรือมีระบบ Terminal/Logging/Backup เก็บไว้เอง ซึ่งเป็นความรับผิดชอบของการตั้งค่าเครื่องนั้น Python และระบบปฏิบัติการไม่รับประกันการล้างข้อมูลจากหน่วยความจำอย่างสมบูรณ์ในเชิง Forensic เมื่อโปรเซสจบลง</p>
+
+    <h3>7. มาตรการความปลอดภัย</h3>
+    <p>ใช้ HTTPS/TLS ตรวจสอบใบรับรอง ปฏิเสธ Redirect จำกัด API ให้เหลือสอง Endpoint ตรวจสอบ Scope และอายุ Token จำกัดขนาดข้อมูลและเวลารอ ปกปิดอีเมล และลดรายละเอียด Error ที่อาจเปิดเผยข้อมูล มาตรการเหล่านี้ช่วยลดความเสี่ยงแต่ไม่สามารถรับประกันความปลอดภัยได้ทั้งหมด ผู้ใช้ควรปกป้องอุปกรณ์และไม่เปิดเผย Token หรือ App Secret</p>
+
+    <h3>8. สิทธิ์และการยกเลิกการเชื่อมต่อ</h3>
+    <p>การใช้งาน Connector เป็นทางเลือก ผู้ใช้สามารถหยุดใช้งานและจัดการหรือเพิกถอนสิทธิ์แอปผ่านการตั้งค่า Connected Apps ของบัญชี Dropbox ได้ เนื่องจาก R1 ไม่มีระบบเก็บบัญชีหรือ Token บนเซิร์ฟเวอร์ HAIOS จึงไม่มีระเบียนบัญชีบน HAIOS ให้ลบ</p>
+
+    <h3>9. การประมวลผลในต่างประเทศและการเปลี่ยนแปลง</h3>
+    <p>Connector ทำงานในเครื่อง Windows ของผู้ใช้ ส่วน Dropbox และ GitHub ประมวลผลข้อมูลที่จำเป็นต่อบริการตามโครงสร้างพื้นฐานและเงื่อนไขของผู้ให้บริการนั้น การเพิ่มสิทธิ์อ่าน Metadata/เนื้อหาไฟล์ การ Sync การทำ Index หรือ Cloud AI Processing อยู่นอกขอบเขต R1 และต้องผ่านการออกแบบ การอนุญาต และปรับปรุงนโยบายก่อน</p>
+
+    <h3>10. ติดต่อ</h3>
+    <p>สอบถามเกี่ยวกับนโยบายนี้หรือขอช่องทางติดต่อส่วนตัวได้ผ่าน <a href="https://github.com/charan-forlorn">GitHub Profile ของผู้พัฒนา</a> โปรดอย่าโพสต์ Token รหัสผ่าน ข้อมูลบัญชี Dropbox แบบเต็ม หรือข้อมูลส่วนบุคคลที่ละเอียดอ่อนใน GitHub Issue สาธารณะ</p>
+  </section>
+
+  <footer><div class="wrap">
+    <p>HAIOS · Dropbox Read-Only Connector · Privacy Policy R1 · Effective 18 November 2026</p>
+    <p><a href="./">Home</a> · <a href="https://github.com/charan-forlorn/haios-privacy">Source repository</a></p>
+  </div></footer>
+</main>
+</body>
+</html>
